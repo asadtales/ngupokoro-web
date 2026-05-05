@@ -1,0 +1,202 @@
+---
+const navLinks = [
+  { href: '#layanan', label: 'Layanan' },
+  { href: '#tentang', label: 'Tentang' },
+  { href: '#nilai', label: 'Nilai' },
+  { href: '#kontak', label: 'Kontak' },
+];
+---
+
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <!-- Logo -->
+    <a href="/" class="nav-logo" aria-label="Ngupokoro">
+      <svg width="32" height="32" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+        <path d="M60 8L112 60L60 112L8 60Z" stroke="#C8A84B" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <circle cx="60" cy="60" r="24" fill="rgba(200,168,75,0.07)" stroke="rgba(200,168,75,0.18)" stroke-width="1.5"/>
+        <path d="M44 76V44L60 68V44M60 68V76" stroke="#C8A84B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="60" cy="12" r="3" fill="#C8A84B"/>
+        <circle cx="108" cy="60" r="3" fill="#C8A84B"/>
+        <circle cx="60" cy="108" r="3" fill="#C8A84B"/>
+        <circle cx="12" cy="60" r="3" fill="#C8A84B"/>
+      </svg>
+      <span class="nav-wordmark">Ngupokoro</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="nav-links" aria-label="Navigasi utama">
+      {navLinks.map(link => (
+        <a href={link.href} class="nav-link">{link.label}</a>
+      ))}
+    </nav>
+
+    <!-- CTA -->
+    <a href="#kontak" class="nav-cta">Hubungi Kami</a>
+
+    <!-- Hamburger -->
+    <button class="nav-burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    {navLinks.map(link => (
+      <a href={link.href} class="mobile-link">{link.label}</a>
+    ))}
+    <a href="#kontak" class="mobile-link cta">Hubungi Kami →</a>
+  </div>
+</header>
+
+<style>
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  transition: background 0.3s, border-bottom 0.3s;
+  border-bottom: 1px solid transparent;
+}
+
+.navbar.scrolled {
+  background: rgba(13, 17, 23, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom-color: rgba(200, 168, 75, 0.15);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: auto;
+}
+
+.nav-wordmark {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-link {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+
+.nav-link:hover { color: var(--cream); }
+.nav-link:hover::after { width: 100%; }
+
+.nav-cta {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(200, 168, 75, 0.35);
+  padding: 9px 20px;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.nav-cta:hover {
+  background: var(--gold);
+  color: var(--deep);
+  border-color: var(--gold);
+}
+
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: auto;
+}
+
+.nav-burger span {
+  display: block;
+  width: 24px; height: 1.5px;
+  background: var(--cream);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  padding: 20px 20px 28px;
+  gap: 4px;
+  background: rgba(13, 17, 23, 0.98);
+  border-top: 1px solid rgba(200, 168, 75, 0.1);
+}
+
+.mobile-link {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  color: var(--muted);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: color 0.2s;
+}
+
+.mobile-link:hover { color: var(--cream); }
+.mobile-link.cta { color: var(--gold); border-bottom: none; margin-top: 8px; }
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-burger { display: flex; }
+  .mobile-menu.open { display: flex; }
+}
+</style>
+
+<script>
+const navbar = document.getElementById('navbar');
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+window.addEventListener('scroll', () => {
+  navbar?.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+burger?.addEventListener('click', () => {
+  const isOpen = mobileMenu?.classList.toggle('open');
+  burger.setAttribute('aria-expanded', String(isOpen));
+  mobileMenu?.setAttribute('aria-hidden', String(!isOpen));
+});
+
+// Close on link click
+mobileMenu?.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    burger?.setAttribute('aria-expanded', 'false');
+  });
+});
+</script>

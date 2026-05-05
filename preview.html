@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ngupokoro — Digital Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep: #0D1117;
+  --ink: #1A1F2E;
+  --gold: #C8A84B;
+  --gold-light: #E2C97E;
+  --amber: #D4813A;
+  --cream: #F5EFE0;
+  --muted: #8B7355;
+  --white: #FDFAF4;
+  --accent: #2E6B8A;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { background: var(--deep); color: var(--cream); font-family: var(--font-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+
+.batik-bg {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C8A84B' fill-rule='evenodd'%3E%3Cpath d='M40 0L80 40L40 80L0 40Z'/%3E%3Ccircle cx='40' cy='40' r='12'/%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 80px 80px;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+.gold-sep { height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); opacity: 0.3; margin: 0 auto; }
+.label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); }
+
+@keyframes floatIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse-glow { 0%, 100% { transform: translate(-50%,-50%) scale(1); opacity:1; } 50% { transform: translate(-50%,-50%) scale(1.2); opacity:0.6; } }
+@keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ── NAVBAR ── */
+.navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: background .3s, border-bottom .3s; border-bottom: 1px solid transparent; }
+.navbar.scrolled { background: rgba(13,17,23,.95); backdrop-filter: blur(12px); border-bottom-color: rgba(200,168,75,.15); }
+.nav-inner { display: flex; align-items: center; gap: 40px; padding: 20px 40px; max-width: 1200px; margin: 0 auto; }
+.nav-logo { display: flex; align-items: center; gap: 10px; margin-right: auto; }
+.nav-wordmark { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--white); letter-spacing: -.5px; }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-link { font-size: 14px; color: var(--muted); transition: color .2s; position: relative; }
+.nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width .3s; }
+.nav-link:hover { color: var(--cream); }
+.nav-link:hover::after { width: 100%; }
+.nav-cta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(200,168,75,.35); padding: 9px 20px; transition: background .2s, color .2s; }
+.nav-cta:hover { background: var(--gold); color: var(--deep); }
+
+/* ── HERO ── */
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 40px 80px; position: relative; z-index:1; overflow: hidden; }
+.hero-glow { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(200,168,75,.10) 0%, transparent 68%); top: 50%; left: 50%; transform: translate(-50%,-50%); animation: pulse-glow 7s ease-in-out infinite; pointer-events: none; }
+.logo-mark { margin-bottom: 36px; opacity: 0; animation: floatIn 1s ease-out .2s forwards; filter: drop-shadow(0 0 28px rgba(200,168,75,.35)); }
+.spin-ring { transform-origin: 60px 60px; animation: spin-slow 30s linear infinite; }
+.hero-label { opacity: 0; animation: floatIn 1s ease-out .45s forwards; margin-bottom: 20px; }
+.hero-name { font-family: var(--font-display); font-size: clamp(60px,11vw,108px); font-weight: 900; line-height: 1; letter-spacing: -3px; color: var(--white); margin-bottom: 16px; opacity: 0; animation: floatIn 1s ease-out .6s forwards; }
+.hero-name span { color: var(--gold); font-style: italic; }
+.hero-tagline { font-family: var(--font-body); font-size: 18px; font-weight: 300; color: var(--muted); letter-spacing: 2px; margin-bottom: 6px; opacity: 0; animation: floatIn 1s ease-out .75s forwards; }
+.hero-sub { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 40px; opacity: 0; animation: floatIn 1s ease-out .9s forwards; }
+.hero-desc { max-width: 540px; font-size: 15px; line-height: 1.85; color: #9B8E7A; margin-bottom: 48px; opacity: 0; animation: floatIn 1s ease-out 1.05s forwards; }
+.hero-actions { display: flex; align-items: center; gap: 20px; opacity: 0; animation: floatIn 1s ease-out 1.2s forwards; flex-wrap: wrap; justify-content: center; }
+.btn-primary { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; background: var(--gold); color: var(--deep); padding: 14px 32px; font-weight: 700; transition: background .2s, transform .2s; }
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+.btn-ghost { font-family: var(--font-body); font-size: 14px; color: var(--cream); border-bottom: 1px solid rgba(245,239,224,.3); padding-bottom: 2px; transition: color .2s, border-color .2s; }
+.btn-ghost:hover { color: var(--gold); border-color: var(--gold); }
+.scroll-line { width: 1px; height: 72px; background: linear-gradient(to bottom, var(--gold), transparent); margin-top: 64px; opacity: 0; animation: floatIn 1s ease-out 1.5s forwards; }
+
+/* ── SERVICES ── */
+.services-section { padding: 120px 0; position: relative; z-index: 1; }
+.section-header { margin-bottom: 64px; }
+.section-heading { font-family: var(--font-display); font-size: clamp(32px,4vw,52px); font-weight: 700; color: var(--white); line-height: 1.15; margin-top: 14px; }
+.section-heading em { color: var(--gold); }
+.services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(200,168,75,.08); border: 1px solid rgba(200,168,75,.08); }
+.service-card { background: var(--deep); padding: 40px 36px; transition: background .3s; display: flex; flex-direction: column; gap: 14px; }
+.service-card:hover { background: var(--ink); }
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+.card-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; color: rgba(200,168,75,.4); }
+.card-title { font-family: var(--font-display); font-size: 19px; font-weight: 700; color: var(--white); line-height: 1.3; }
+.card-desc { font-size: 14px; line-height: 1.75; color: var(--muted); flex: 1; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.tag { font-family: var(--font-mono); font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(200,168,75,.25); padding: 3px 8px; }
+
+/* ── ABOUT ── */
+.about-section { padding: 120px 0; position: relative; z-index: 1; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-text { display: flex; flex-direction: column; gap: 20px; }
+.about-heading { font-family: var(--font-display); font-size: clamp(32px,3.5vw,48px); font-weight: 700; color: var(--white); line-height: 1.15; margin-top: 12px; }
+.about-heading em { color: var(--gold); }
+.about-body { font-size: 15px; line-height: 1.85; color: var(--muted); }
+.about-body strong { color: var(--cream); }
+.about-body em { color: var(--gold-light); font-style: italic; }
+.stats-row { display: flex; gap: 40px; padding-top: 16px; border-top: 1px solid rgba(200,168,75,.15); margin-top: 8px; }
+.stat-val { font-family: var(--font-display); font-size: 36px; font-weight: 900; color: var(--gold); line-height: 1; }
+.stat-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+.visual-frame { background: var(--ink); border: 1px solid rgba(200,168,75,.12); padding: 40px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.visual-frame::before { content: ''; position: absolute; top:12px;left:12px;right:12px;bottom:12px; border:1px solid rgba(200,168,75,.06); pointer-events:none; }
+.visual-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(200,168,75,.4); }
+
+/* ── VALUES ── */
+.values-section { padding: 120px 0; position: relative; z-index: 1; }
+.values-strip { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid rgba(200,168,75,.15); border-left: 1px solid rgba(200,168,75,.08); }
+.value-item { padding: 52px 40px; border-right: 1px solid rgba(200,168,75,.08); border-bottom: 1px solid rgba(200,168,75,.08); display: flex; flex-direction: column; gap: 16px; transition: background .3s; }
+.value-item:hover { background: rgba(200,168,75,.03); }
+.value-header { display: flex; justify-content: space-between; align-items: center; }
+.value-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; color: rgba(200,168,75,.35); }
+.value-icon { font-size: 22px; }
+.value-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--white); line-height: 1.3; }
+.value-desc { font-size: 14px; line-height: 1.8; color: var(--muted); }
+.value-line { width: 32px; height: 1px; background: var(--gold); opacity: 0; transition: opacity .3s, width .3s; }
+.value-item:hover .value-line { opacity: 1; width: 48px; }
+
+/* ── CONTACT ── */
+.contact-section { padding: 120px 0 80px; position: relative; z-index: 1; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.contact-left { display: flex; flex-direction: column; gap: 24px; }
+.contact-heading { font-family: var(--font-display); font-size: clamp(32px,4vw,52px); font-weight: 700; color: var(--white); line-height: 1.15; margin-top: 12px; }
+.contact-heading em { color: var(--gold); }
+.contact-sub { font-size: 15px; line-height: 1.8; color: var(--muted); }
+.contact-details { display: flex; flex-direction: column; gap: 16px; padding: 28px 0; border-top: 1px solid rgba(200,168,75,.15); border-bottom: 1px solid rgba(200,168,75,.15); }
+.contact-item { display: flex; gap: 20px; align-items: baseline; }
+.ci-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(200,168,75,.5); min-width: 60px; }
+.ci-value { font-size: 14px; color: var(--cream); }
+.app-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.app-chip { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; color: var(--muted); border: 1px solid rgba(255,255,255,.08); padding: 7px 14px; transition: color .2s, border-color .2s; }
+.app-chip:hover { color: var(--gold); border-color: rgba(200,168,75,.3); }
+.chip-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); opacity: .6; display: block; }
+.card-inner { background: var(--ink); border: 1px solid rgba(200,168,75,.15); padding: 52px 44px; display: flex; flex-direction: column; align-items: flex-start; gap: 20px; position: relative; }
+.card-inner::before { content: ''; position: absolute; top:10px;left:10px;right:10px;bottom:10px; border:1px solid rgba(200,168,75,.05); pointer-events:none; }
+.card-title { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--white); }
+.card-body { font-size: 14px; line-height: 1.75; color: var(--muted); }
+.cta-btn { display: block; width: 100%; font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; text-align: center; background: var(--gold); color: var(--deep); padding: 16px; font-weight: 700; transition: background .2s; }
+.cta-btn:hover { background: var(--gold-light); }
+.or-divider { width: 100%; display: flex; align-items: center; gap: 12px; }
+.or-divider::before, .or-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,.08); }
+.or-divider span { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.wa-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; font-size: 14px; font-weight: 500; color: var(--cream); border: 1px solid rgba(255,255,255,.12); padding: 14px; transition: color .2s, border-color .2s, background .2s; }
+.wa-btn:hover { background: rgba(37,211,102,.08); color: #25d366; border-color: rgba(37,211,102,.3); }
+
+/* ── FOOTER ── */
+footer { position: relative; z-index: 1; }
+.footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 60px; padding-top: 60px; padding-bottom: 48px; }
+.footer-brand { display: flex; flex-direction: column; gap: 16px; }
+.footer-logo { display: flex; align-items: center; gap: 10px; }
+.footer-wordmark { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--white); }
+.footer-desc { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; line-height: 1.8; color: rgba(200,168,75,.4); }
+.footer-links { display: flex; gap: 60px; }
+.link-group { display: flex; flex-direction: column; gap: 10px; }
+.link-group-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(200,168,75,.4); margin-bottom: 4px; }
+.link-group a { font-size: 13px; color: var(--muted); transition: color .2s; }
+.link-group a:hover { color: var(--cream); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-bottom: 32px; border-top: 1px solid rgba(255,255,255,.05); padding-top: 20px; }
+.footer-copy { font-size: 12px; color: rgba(139,115,85,.6); }
+.footer-mono { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(200,168,75,.3); }
+
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2,1fr); }
+  .values-strip { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 900px) {
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 60px; }
+}
+@media (max-width: 640px) {
+  .container { padding: 0 20px; }
+  .nav-inner { padding: 20px; }
+  .nav-links, .nav-cta { display: none; }
+  .services-grid, .values-strip { grid-template-columns: 1fr; }
+  .hero-name { letter-spacing: -1px; }
+  .stats-row { gap: 24px; }
+  .footer-inner { flex-direction: column; gap: 40px; }
+  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="batik-bg"></div>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <svg width="32" height="32" viewBox="0 0 120 120" fill="none">
+        <path d="M60 8L112 60L60 112L8 60Z" stroke="#C8A84B" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <circle cx="60" cy="60" r="24" fill="rgba(200,168,75,0.07)" stroke="rgba(200,168,75,0.18)" stroke-width="1.5"/>
+        <path d="M44 76V44L60 68V44M60 68V76" stroke="#C8A84B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="60" cy="12" r="3" fill="#C8A84B"/>
+        <circle cx="108" cy="60" r="3" fill="#C8A84B"/>
+        <circle cx="60" cy="108" r="3" fill="#C8A84B"/>
+        <circle cx="12" cy="60" r="3" fill="#C8A84B"/>
+      </svg>
+      <span class="nav-wordmark">Ngupokoro</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#layanan" class="nav-link">Layanan</a>
+      <a href="#tentang" class="nav-link">Tentang</a>
+      <a href="#nilai" class="nav-link">Nilai</a>
+      <a href="#kontak" class="nav-link">Kontak</a>
+    </nav>
+    <a href="#kontak" class="nav-cta">Hubungi Kami</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="logo-mark">
+    <svg width="110" height="110" viewBox="0 0 120 120" fill="none">
+      <path d="M60 4L116 60L60 116L4 60Z" stroke="#C8A84B" stroke-width="1" fill="none" opacity="0.35"/>
+      <circle cx="60" cy="60" r="42" fill="none" stroke="#C8A84B" stroke-width="0.5" stroke-dasharray="4 6" opacity="0.3" class="spin-ring"/>
+      <circle cx="60" cy="60" r="28" fill="rgba(200,168,75,0.06)" stroke="rgba(200,168,75,0.25)" stroke-width="1.5"/>
+      <path d="M44 76V44L60 68V44M60 68V76" stroke="#C8A84B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="60" cy="12" r="3.5" fill="#C8A84B"/>
+      <circle cx="108" cy="60" r="3.5" fill="#C8A84B"/>
+      <circle cx="60" cy="108" r="3.5" fill="#C8A84B"/>
+      <circle cx="12" cy="60" r="3.5" fill="#C8A84B"/>
+      <circle cx="60" cy="32" r="1.5" fill="#C8A84B" opacity="0.4"/>
+      <circle cx="88" cy="60" r="1.5" fill="#C8A84B" opacity="0.4"/>
+      <circle cx="60" cy="88" r="1.5" fill="#C8A84B" opacity="0.4"/>
+      <circle cx="32" cy="60" r="1.5" fill="#C8A84B" opacity="0.4"/>
+    </svg>
+  </div>
+  <p class="label hero-label">PT. Asterix Inovasi Teknologi</p>
+  <h1 class="hero-name">Ngu<span>pokoro</span></h1>
+  <p class="hero-tagline">Digital Solutions · Software House</p>
+  <p class="hero-sub">Berakar Lokal · Berpikir Global</p>
+  <p class="hero-desc">Kami menghadirkan solusi digital yang benar-benar bekerja — bukan sekadar sistem yang ada, melainkan solusi yang dirancang dari kebutuhan nyata di lapangan, dengan teknologi yang tepat guna.</p>
+  <div class="hero-actions">
+    <a href="#layanan" class="btn-primary">Lihat Layanan</a>
+    <a href="#kontak" class="btn-ghost">Mulai Proyek →</a>
+  </div>
+  <div class="scroll-line"></div>
+</section>
+
+<div class="gold-sep"></div>
+
+<!-- SERVICES -->
+<section class="services-section" id="layanan">
+  <div class="container">
+    <div class="section-header">
+      <p class="label">01 — Layanan</p>
+      <h2 class="section-heading">Apa yang kami<br><em>bangun untuk Anda</em></h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="card-top"><span class="card-num">01</span><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="11" height="11" rx="2" stroke="#C8A84B" stroke-width="1.5"/><rect x="15" y="2" width="11" height="11" rx="2" stroke="#C8A84B" stroke-width="1.5" opacity="0.4"/><rect x="2" y="15" width="11" height="11" rx="2" stroke="#C8A84B" stroke-width="1.5" opacity="0.4"/><rect x="15" y="15" width="11" height="11" rx="2" stroke="#C8A84B" stroke-width="1.5" opacity="0.7"/></svg></div>
+        <h3 class="card-title">Pengembangan Aplikasi</h3>
+        <p class="card-desc">Web app, mobile app, dan sistem internal yang dirancang dari kebutuhan nyata pengguna. Stack modern, performa terukur.</p>
+        <div class="card-tags"><span class="tag">Web App</span><span class="tag">Mobile</span><span class="tag">API</span></div>
+      </div>
+      <div class="service-card">
+        <div class="card-top"><span class="card-num">02</span><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="#C8A84B" stroke-width="1.5"/><path d="M9 14h10M14 9v10" stroke="#C8A84B" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="4" r="1.5" fill="#C8A84B"/><circle cx="24" cy="14" r="1.5" fill="#C8A84B"/><circle cx="14" cy="24" r="1.5" fill="#C8A84B"/><circle cx="4" cy="14" r="1.5" fill="#C8A84B"/></svg></div>
+        <h3 class="card-title">Sistem Informasi Desa & Pemda</h3>
+        <p class="card-desc">Sistem digital untuk pemerintahan desa dan daerah — administrasi, keuangan, dan layanan publik yang terintegrasi.</p>
+        <div class="card-tags"><span class="tag">E-Gov</span><span class="tag">Desa</span><span class="tag">Administrasi</span></div>
+      </div>
+      <div class="service-card">
+        <div class="card-top"><span class="card-num">03</span><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 20L10 8l5 8 4-5 5 9" stroke="#C8A84B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="2" width="24" height="24" rx="3" stroke="#C8A84B" stroke-width="1" opacity="0.3"/></svg></div>
+        <h3 class="card-title">Dashboard & Analitik</h3>
+        <p class="card-desc">Visualisasi data dan laporan real-time untuk pengambilan keputusan yang lebih baik di semua level organisasi.</p>
+        <div class="card-tags"><span class="tag">BI</span><span class="tag">Laporan</span><span class="tag">Monitoring</span></div>
+      </div>
+      <div class="service-card">
+        <div class="card-top"><span class="card-num">04</span><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 3v8M14 3l-3 3M14 3l3 3" stroke="#C8A84B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 12h20v12a1 1 0 01-1 1H5a1 1 0 01-1-1V12z" stroke="#C8A84B" stroke-width="1.5" opacity="0.5"/><path d="M10 17h8" stroke="#C8A84B" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3 class="card-title">Infrastruktur & DevOps</h3>
+        <p class="card-desc">Setup server, VPS, Cloudflare, CI/CD, dan monitoring. Infrastruktur yang andal tanpa biaya berlebihan.</p>
+        <div class="card-tags"><span class="tag">VPS</span><span class="tag">Cloudflare</span><span class="tag">CI/CD</span></div>
+      </div>
+      <div class="service-card">
+        <div class="card-top"><span class="card-num">05</span><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="5" stroke="#C8A84B" stroke-width="1.5"/><path d="M5 24c0-5 4-8 9-8s9 3 9 8" stroke="#C8A84B" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/></svg></div>
+        <h3 class="card-title">Konsultasi & Transformasi Digital</h3>
+        <p class="card-desc">Kami bantu petakan kebutuhan teknologi Anda, pilih solusi yang tepat, dan kawal implementasinya dari awal hingga selesai.</p>
+        <div class="card-tags"><span class="tag">Konsultasi</span><span class="tag">Roadmap</span><span class="tag">Pendampingan</span></div>
+      </div>
+      <div class="service-card">
+        <div class="card-top"><span class="card-num">06</span><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M8 8h12v8H8z" stroke="#C8A84B" stroke-width="1.5"/><path d="M11 16v4M17 16v4M8 20h12" stroke="#C8A84B" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><circle cx="14" cy="4" r="2" fill="#C8A84B" opacity="0.5"/></svg></div>
+        <h3 class="card-title">Maintenance & Support</h3>
+        <p class="card-desc">Sistem yang kami bangun, kami jaga. Dukungan teknis berkelanjutan agar operasional Anda tidak pernah terhenti.</p>
+        <div class="card-tags"><span class="tag">SLA</span><span class="tag">Monitoring</span><span class="tag">Update</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-sep"></div>
+
+<!-- ABOUT -->
+<section class="about-section" id="tentang">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="label">02 — Tentang Kami</p>
+        <h2 class="about-heading">Lahir dari akar<br><em>Jawa, tumbuh</em><br>bersama teknologi</h2>
+        <p class="about-body"><strong>Ngupokoro</strong> — dari bahasa Jawa, artinya <em>mencari cara</em>. Filosofi ini menjadi napas dari setiap solusi yang kami bangun.</p>
+        <p class="about-body">Kami adalah tim di bawah <strong>PT. Asterix Inovasi Teknologi</strong>, lahir dari pemahaman mendalam tentang kebutuhan digital di Indonesia — dari tingkat desa hingga enterprise.</p>
+        <p class="about-body">Berbasis di Kediri, Jawa Timur — kami percaya inovasi tidak harus datang dari pusat. Kearifan lokal dan teknologi modern bisa berjalan beriringan.</p>
+        <div class="stats-row">
+          <div><div class="stat-val">2025</div><div class="stat-label">Tahun Berdiri</div></div>
+          <div><div class="stat-val">10+</div><div class="stat-label">Proyek Aktif</div></div>
+          <div><div class="stat-val">100%</div><div class="stat-label">Komitmen Penuh</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="visual-frame">
+          <svg width="100%" viewBox="0 0 400 400" fill="none">
+            <circle cx="200" cy="200" r="180" stroke="#C8A84B" stroke-width="0.5" opacity="0.1"/>
+            <circle cx="200" cy="200" r="140" stroke="#C8A84B" stroke-width="0.5" opacity="0.15"/>
+            <circle cx="200" cy="200" r="100" stroke="#C8A84B" stroke-width="1" opacity="0.2"/>
+            <path d="M200 40L360 200L200 360L40 200Z" stroke="#C8A84B" stroke-width="1" fill="none" opacity="0.2"/>
+            <line x1="200" y1="20" x2="200" y2="60" stroke="#C8A84B" stroke-width="1" opacity="0.6"/>
+            <line x1="380" y1="200" x2="340" y2="200" stroke="#C8A84B" stroke-width="1" opacity="0.6"/>
+            <line x1="200" y1="380" x2="200" y2="340" stroke="#C8A84B" stroke-width="1" opacity="0.6"/>
+            <line x1="20" y1="200" x2="60" y2="200" stroke="#C8A84B" stroke-width="1" opacity="0.6"/>
+            <circle cx="200" cy="20" r="4" fill="#C8A84B"/>
+            <circle cx="380" cy="200" r="4" fill="#C8A84B"/>
+            <circle cx="200" cy="380" r="4" fill="#C8A84B"/>
+            <circle cx="20" cy="200" r="4" fill="#C8A84B"/>
+            <circle cx="200" cy="200" r="60" fill="rgba(200,168,75,0.05)" stroke="rgba(200,168,75,0.3)" stroke-width="1.5"/>
+            <path d="M178 228V172L200 208V172M200 208V228" stroke="#C8A84B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="visual-label">Est. 2025 · Kediri, Jawa Timur</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-sep"></div>
+
+<!-- VALUES -->
+<section class="values-section" id="nilai">
+  <div class="container">
+    <div class="section-header">
+      <p class="label">03 — Nilai & Karakter</p>
+      <h2 class="section-heading">Yang kami percaya<br><em>dan kami jalani</em></h2>
+    </div>
+  </div>
+  <div class="values-strip">
+    <div class="value-item">
+      <div class="value-header"><span class="value-num">01</span><span class="value-icon">🔍</span></div>
+      <h3 class="value-title">Ngupokoro — Mencari Cara</h3>
+      <p class="value-desc">Kami selalu mencari jalan terbaik. Tidak menyerah pada hambatan, kami percaya setiap masalah memiliki solusi yang belum ditemukan.</p>
+      <div class="value-line"></div>
+    </div>
+    <div class="value-item">
+      <div class="value-header"><span class="value-num">02</span><span class="value-icon">⚙️</span></div>
+      <h3 class="value-title">Teknologi Tepat Guna</h3>
+      <p class="value-desc">Solusi yang kami bangun sesuai kebutuhan nyata — tidak berlebihan, tidak kurang. Efisien dan relevan untuk konteks Indonesia.</p>
+      <div class="value-line"></div>
+    </div>
+    <div class="value-item">
+      <div class="value-header"><span class="value-num">03</span><span class="value-icon">🌱</span></div>
+      <h3 class="value-title">Berakar Lokal</h3>
+      <p class="value-desc">Lahir dari kearifan lokal Jawa, kami memahami tantangan dan kebutuhan unik pengguna Indonesia dari desa hingga kota.</p>
+      <div class="value-line"></div>
+    </div>
+    <div class="value-item">
+      <div class="value-header"><span class="value-num">04</span><span class="value-icon">🤝</span></div>
+      <h3 class="value-title">Mitra, Bukan Vendor</h3>
+      <p class="value-desc">Kami tumbuh bersama klien. Setiap proyek adalah kolaborasi jangka panjang, bukan sekadar transaksi selesai-pergi.</p>
+      <div class="value-line"></div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-sep"></div>
+
+<!-- CONTACT -->
+<section class="contact-section" id="kontak">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <p class="label">04 — Kontak</p>
+        <h2 class="contact-heading">Punya proyek?<br><em>Mari kita bicara.</em></h2>
+        <p class="contact-sub">Ceritakan kebutuhan Anda — kami akan bantu carikan solusi yang tepat, efisien, dan berkelanjutan.</p>
+        <div class="contact-details">
+          <div class="contact-item"><span class="ci-label">Email</span><a href="mailto:hello@ngupokoro.cloud" class="ci-value">hello@ngupokoro.cloud</a></div>
+          <div class="contact-item"><span class="ci-label">Website</span><span class="ci-value">ngupokoro.cloud</span></div>
+          <div class="contact-item"><span class="ci-label">Lokasi</span><span class="ci-value">Kediri, Jawa Timur, Indonesia</span></div>
+          <div class="contact-item"><span class="ci-label">Entitas</span><span class="ci-value">PT. Asterix Inovasi Teknologi</span></div>
+        </div>
+        <div class="app-links">
+          <a href="https://desa.ngupokoro.cloud" class="app-chip" target="_blank"><span class="chip-dot"></span> desa.ngupokoro.cloud</a>
+          <a href="https://ilp.ngupokoro.cloud" class="app-chip" target="_blank"><span class="chip-dot"></span> ilp.ngupokoro.cloud</a>
+        </div>
+      </div>
+      <div>
+        <div class="card-inner">
+          <svg width="48" height="48" viewBox="0 0 120 120" fill="none">
+            <path d="M60 8L112 60L60 112L8 60Z" stroke="#C8A84B" stroke-width="1.5" fill="none" opacity="0.4"/>
+            <circle cx="60" cy="60" r="26" fill="rgba(200,168,75,0.08)" stroke="rgba(200,168,75,0.25)" stroke-width="1.5"/>
+            <path d="M44 76V44L60 68V44M60 68V76" stroke="#C8A84B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="60" cy="12" r="3.5" fill="#C8A84B"/><circle cx="108" cy="60" r="3.5" fill="#C8A84B"/>
+            <circle cx="60" cy="108" r="3.5" fill="#C8A84B"/><circle cx="12" cy="60" r="3.5" fill="#C8A84B"/>
+          </svg>
+          <h3 class="card-title">Mulai Kolaborasi</h3>
+          <p class="card-body">Konsultasi awal gratis. Kami pahami kebutuhan Anda, lalu rancang solusi yang paling tepat.</p>
+          <a href="mailto:hello@ngupokoro.cloud?subject=Konsultasi%20Proyek%20Digital" class="cta-btn">Kirim Email Sekarang</a>
+          <div class="or-divider"><span>atau hubungi via</span></div>
+          <a href="#" class="wa-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="gold-sep"></div>
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <svg width="28" height="28" viewBox="0 0 120 120" fill="none">
+          <path d="M60 8L112 60L60 112L8 60Z" stroke="#C8A84B" stroke-width="1.5" fill="none" opacity="0.4"/>
+          <circle cx="60" cy="60" r="24" fill="rgba(200,168,75,0.05)" stroke="rgba(200,168,75,0.2)" stroke-width="1.5"/>
+          <path d="M44 76V44L60 68V44M60 68V76" stroke="#C8A84B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="60" cy="12" r="3" fill="#C8A84B"/><circle cx="108" cy="60" r="3" fill="#C8A84B"/>
+          <circle cx="60" cy="108" r="3" fill="#C8A84B"/><circle cx="12" cy="60" r="3" fill="#C8A84B"/>
+        </svg>
+        <span class="footer-wordmark">Ngupokoro</span>
+      </div>
+      <p class="footer-desc">Digital Solutions<br>PT. Asterix Inovasi Teknologi</p>
+    </div>
+    <div class="footer-links">
+      <div class="link-group">
+        <p class="link-group-label">Navigasi</p>
+        <a href="#layanan">Layanan</a><a href="#tentang">Tentang</a>
+        <a href="#nilai">Nilai</a><a href="#kontak">Kontak</a>
+      </div>
+      <div class="link-group">
+        <p class="link-group-label">Aplikasi</p>
+        <a href="https://desa.ngupokoro.cloud" target="_blank">desa.ngupokoro.cloud</a>
+        <a href="https://ilp.ngupokoro.cloud" target="_blank">ilp.ngupokoro.cloud</a>
+      </div>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p class="footer-copy">© 2025 PT. Asterix Inovasi Teknologi · Ngupokoro Digital Solutions</p>
+    <p class="footer-mono">Kediri, Jawa Timur · Indonesia</p>
+  </div>
+</footer>
+
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
+</script>
+</body>
+</html>

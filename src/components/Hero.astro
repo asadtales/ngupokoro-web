@@ -1,0 +1,200 @@
+---
+---
+
+<section class="hero" id="home">
+  <!-- Ambient glow -->
+  <div class="hero-glow" aria-hidden="true"></div>
+
+  <!-- Logo mark -->
+  <div class="logo-mark" aria-hidden="true">
+    <svg width="110" height="110" viewBox="0 0 120 120" fill="none">
+      <!-- Outer diamond -->
+      <path d="M60 4L116 60L60 116L4 60Z" stroke="#C8A84B" stroke-width="1" fill="none" opacity="0.35"/>
+      <!-- Rotating ring -->
+      <circle cx="60" cy="60" r="42" fill="none" stroke="#C8A84B" stroke-width="0.5" stroke-dasharray="4 6" opacity="0.3" class="spin-ring"/>
+      <!-- Main circle -->
+      <circle cx="60" cy="60" r="28" fill="rgba(200,168,75,0.06)" stroke="rgba(200,168,75,0.25)" stroke-width="1.5"/>
+      <!-- N letterform -->
+      <path d="M44 76V44L60 68V44M60 68V76" stroke="#C8A84B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Cardinal dots -->
+      <circle cx="60" cy="12" r="3.5" fill="#C8A84B"/>
+      <circle cx="108" cy="60" r="3.5" fill="#C8A84B"/>
+      <circle cx="60" cy="108" r="3.5" fill="#C8A84B"/>
+      <circle cx="12" cy="60" r="3.5" fill="#C8A84B"/>
+      <!-- Inner accent dots -->
+      <circle cx="60" cy="32" r="1.5" fill="#C8A84B" opacity="0.4"/>
+      <circle cx="88" cy="60" r="1.5" fill="#C8A84B" opacity="0.4"/>
+      <circle cx="60" cy="88" r="1.5" fill="#C8A84B" opacity="0.4"/>
+      <circle cx="32" cy="60" r="1.5" fill="#C8A84B" opacity="0.4"/>
+    </svg>
+  </div>
+
+  <p class="label hero-label">PT. Asterix Inovasi Teknologi</p>
+
+  <h1 class="hero-name">
+    Ngu<span>pokoro</span>
+  </h1>
+
+  <p class="hero-tagline">Digital Solutions · Software House</p>
+  <p class="hero-sub">Berakar Lokal · Mencari cara.Menjadikan sesuatu · Berpikir Global</p>
+
+  <p class="hero-desc">
+    Kami menghadirkan solusi digital yang benar-benar bekerja — 
+    bukan sekadar sistem yang ada, melainkan solusi yang dirancang 
+    dari kebutuhan nyata di lapangan, dengan teknologi yang tepat guna.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#layanan" class="btn-primary">Lihat Layanan</a>
+    <a href="#kontak" class="btn-ghost">Mulai Proyek →</a>
+  </div>
+
+  <div class="scroll-line" aria-hidden="true"></div>
+</section>
+
+<style>
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 40px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,168,75,0.10) 0%, transparent 68%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse-glow 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.logo-mark {
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: floatIn 1s ease-out 0.2s forwards;
+  filter: drop-shadow(0 0 28px rgba(200,168,75,0.35));
+}
+
+.spin-ring {
+  transform-origin: 60px 60px;
+  animation: spin-slow 30s linear infinite;
+}
+
+.hero-label {
+  opacity: 0;
+  animation: floatIn 1s ease-out 0.45s forwards;
+  margin-bottom: 20px;
+}
+
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(60px, 11vw, 108px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -3px;
+  color: var(--white);
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: floatIn 1s ease-out 0.6s forwards;
+}
+
+.hero-name span {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.hero-tagline {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--muted);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+  opacity: 0;
+  animation: floatIn 1s ease-out 0.75s forwards;
+}
+
+.hero-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: floatIn 1s ease-out 0.9s forwards;
+}
+
+.hero-desc {
+  max-width: 540px;
+  font-size: 15px;
+  line-height: 1.85;
+  color: #9B8E7A;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: floatIn 1s ease-out 1.05s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  opacity: 0;
+  animation: floatIn 1s ease-out 1.2s forwards;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-primary {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--deep);
+  padding: 14px 32px;
+  font-weight: 700;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--cream);
+  border-bottom: 1px solid rgba(245, 239, 224, 0.3);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.btn-ghost:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 72px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  margin-top: 64px;
+  opacity: 0;
+  animation: floatIn 1s ease-out 1.5s forwards;
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 100px 20px 60px; }
+  .hero-name { letter-spacing: -1px; }
+}
+</style>

@@ -1,0 +1,139 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="gold-sep" style="max-width:100%;"></div>
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <svg width="28" height="28" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+          <path d="M60 8L112 60L60 112L8 60Z" stroke="#C8A84B" stroke-width="1.5" fill="none" opacity="0.4"/>
+          <circle cx="60" cy="60" r="24" fill="rgba(200,168,75,0.05)" stroke="rgba(200,168,75,0.2)" stroke-width="1.5"/>
+          <path d="M44 76V44L60 68V44M60 68V76" stroke="#C8A84B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="60" cy="12" r="3" fill="#C8A84B"/>
+          <circle cx="108" cy="60" r="3" fill="#C8A84B"/>
+          <circle cx="60" cy="108" r="3" fill="#C8A84B"/>
+          <circle cx="12" cy="60" r="3" fill="#C8A84B"/>
+        </svg>
+        <span class="footer-wordmark">Ngupokoro</span>
+      </div>
+      <p class="footer-desc">Digital Solutions<br>PT. Asterix Inovasi Teknologi</p>
+    </div>
+
+    <div class="footer-links">
+      <div class="link-group">
+        <p class="link-group-label">Navigasi</p>
+        <a href="#layanan">Layanan</a>
+        <a href="#tentang">Tentang</a>
+        <a href="#nilai">Nilai</a>
+        <a href="#kontak">Kontak</a>
+      </div>
+      <div class="link-group">
+        <p class="link-group-label">Aplikasi</p>
+        <a href="https://desa.ngupokoro.cloud" target="_blank" rel="noopener">desa.ngupokoro.cloud</a>
+        <a href="https://ilp.ngupokoro.cloud" target="_blank" rel="noopener">ilp.ngupokoro.cloud</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p class="footer-copy">© {year} PT. Asterix Inovasi Teknologi · Ngupokoro Digital Solutions</p>
+    <p class="footer-mono">Kediri, Jawa Timur · Indonesia</p>
+  </div>
+</footer>
+
+<style>
+.footer {
+  position: relative;
+  z-index: 1;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 60px;
+  padding-top: 60px;
+  padding-bottom: 48px;
+}
+
+.footer-brand { display: flex; flex-direction: column; gap: 16px; }
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-wordmark {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.footer-desc {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 1.8;
+  color: rgba(200,168,75,0.4);
+}
+
+.footer-links {
+  display: flex;
+  gap: 60px;
+}
+
+.link-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.link-group-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(200,168,75,0.4);
+  margin-bottom: 4px;
+}
+
+.link-group a {
+  font-size: 13px;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.link-group a:hover { color: var(--cream); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 32px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 20px;
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(139,115,85,0.6);
+}
+
+.footer-mono {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(200,168,75,0.3);
+}
+
+@media (max-width: 768px) {
+  .footer-inner { flex-direction: column; gap: 40px; }
+  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>

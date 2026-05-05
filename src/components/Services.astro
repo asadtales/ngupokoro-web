@@ -1,0 +1,173 @@
+---
+const services = [
+  {
+    num: '01',
+    icon: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="11" height="11" rx="2" stroke="#C8A84B" stroke-width="1.5"/><rect x="15" y="2" width="11" height="11" rx="2" stroke="#C8A84B" stroke-width="1.5" opacity="0.4"/><rect x="2" y="15" width="11" height="11" rx="2" stroke="#C8A84B" stroke-width="1.5" opacity="0.4"/><rect x="15" y="15" width="11" height="11" rx="2" stroke="#C8A84B" stroke-width="1.5" opacity="0.7"/></svg>`,
+    title: 'Pengembangan Aplikasi',
+    desc: 'Web app, mobile app, dan sistem internal yang dirancang dari kebutuhan nyata pengguna. Stack modern, performa terukur.',
+    tags: ['Web App', 'Mobile', 'API'],
+  },
+  {
+    num: '02',
+    icon: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="#C8A84B" stroke-width="1.5"/><path d="M9 14h10M14 9v10" stroke="#C8A84B" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="4" r="1.5" fill="#C8A84B"/><circle cx="24" cy="14" r="1.5" fill="#C8A84B"/><circle cx="14" cy="24" r="1.5" fill="#C8A84B"/><circle cx="4" cy="14" r="1.5" fill="#C8A84B"/></svg>`,
+    title: 'Sistem Informasi Desa & Pemda',
+    desc: 'Sistem digital untuk pemerintahan desa dan daerah — administrasi, keuangan, dan layanan publik yang terintegrasi.',
+    tags: ['E-Gov', 'Desa', 'Administrasi'],
+  },
+  {
+    num: '03',
+    icon: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 20L10 8l5 8 4-5 5 9" stroke="#C8A84B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="2" width="24" height="24" rx="3" stroke="#C8A84B" stroke-width="1" opacity="0.3"/></svg>`,
+    title: 'Dashboard & Analitik',
+    desc: 'Visualisasi data dan laporan real-time untuk pengambilan keputusan yang lebih baik di semua level organisasi.',
+    tags: ['BI', 'Laporan', 'Monitoring'],
+  },
+  {
+    num: '04',
+    icon: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 3v8M14 3l-3 3M14 3l3 3" stroke="#C8A84B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 12h20v12a1 1 0 01-1 1H5a1 1 0 01-1-1V12z" stroke="#C8A84B" stroke-width="1.5" opacity="0.5"/><path d="M10 17h8" stroke="#C8A84B" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+    title: 'Infrastruktur & DevOps',
+    desc: 'Setup server, VPS, Cloudflare, CI/CD, dan monitoring. Infrastruktur yang andal tanpa biaya berlebihan.',
+    tags: ['VPS', 'Cloudflare', 'CI/CD'],
+  },
+  {
+    num: '05',
+    icon: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="5" stroke="#C8A84B" stroke-width="1.5"/><path d="M5 24c0-5 4-8 9-8s9 3 9 8" stroke="#C8A84B" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/></svg>`,
+    title: 'Konsultasi & Transformasi Digital',
+    desc: 'Kami bantu petakan kebutuhan teknologi Anda, pilih solusi yang tepat, dan kawal implementasinya dari awal hingga selesai.',
+    tags: ['Konsultasi', 'Roadmap', 'Pendampingan'],
+  },
+  {
+    num: '06',
+    icon: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M8 8h12v8H8z" stroke="#C8A84B" stroke-width="1.5" rx="1"/><path d="M11 16v4M17 16v4M8 20h12" stroke="#C8A84B" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><circle cx="14" cy="4" r="2" fill="#C8A84B" opacity="0.5"/><path d="M14 6v2" stroke="#C8A84B" stroke-width="1" stroke-linecap="round" opacity="0.4"/></svg>`,
+    title: 'Maintenance & Support',
+    desc: 'Sistem yang kami bangun, kami jaga. Dukungan teknis berkelanjutan agar operasional Anda tidak pernah terhenti.',
+    tags: ['SLA', 'Monitoring', 'Update'],
+  },
+];
+---
+
+<section class="services-section" id="layanan">
+  <div class="container">
+    <div class="section-header">
+      <p class="label">01 — Layanan</p>
+      <h2 class="section-heading">Apa yang kami<br><em>bangun untuk Anda</em></h2>
+    </div>
+
+    <div class="services-grid">
+      {services.map((s) => (
+        <div class="service-card">
+          <div class="card-top">
+            <span class="card-num">{s.num}</span>
+            <div class="card-icon" set:html={s.icon} />
+          </div>
+          <h3 class="card-title">{s.title}</h3>
+          <p class="card-desc">{s.desc}</p>
+          <div class="card-tags">
+            {s.tags.map(tag => <span class="tag">{tag}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.services-section {
+  padding: 120px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  margin-bottom: 64px;
+}
+
+.section-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  margin-top: 14px;
+}
+
+.section-heading em {
+  color: var(--gold);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(200,168,75,0.08);
+  border: 1px solid rgba(200,168,75,0.08);
+}
+
+.service-card {
+  background: var(--deep);
+  padding: 40px 36px;
+  transition: background 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.service-card:hover {
+  background: var(--ink);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+
+.card-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(200,168,75,0.4);
+}
+
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.3;
+}
+
+.card-desc {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--muted);
+  flex: 1;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(200,168,75,0.25);
+  padding: 3px 8px;
+}
+
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .services-section { padding: 80px 0; }
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card { padding: 28px 24px; }
+}
+</style>

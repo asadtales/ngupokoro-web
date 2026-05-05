@@ -1,0 +1,183 @@
+---
+const stats = [
+  { value: '2025', label: 'Tahun Berdiri' },
+  { value: '10+', label: 'Proyek Aktif' },
+  { value: '100%', label: 'Komitmen Penuh' },
+];
+---
+
+<section class="about-section" id="tentang">
+  <div class="container">
+    <div class="about-grid">
+      <!-- Left: Text -->
+      <div class="about-text">
+        <p class="label">02 — Tentang Kami</p>
+        <h2 class="about-heading">
+          Lahir dari akar<br><em>Jawa, tumbuh</em><br>bersama teknologi
+        </h2>
+        <p class="about-body">
+          <strong>Ngupokoro</strong> — dari bahasa Jawa, artinya <em>mencari cara</em>. 
+          Filosofi ini menjadi napas dari setiap solusi yang kami bangun.
+        </p>
+        <p class="about-body">
+          Kami adalah tim di bawah <strong>PT. Asterix Inovasi Teknologi</strong>, 
+          lahir dari pemahaman mendalam tentang kebutuhan digital di Indonesia — 
+          dari tingkat desa hingga enterprise. Kami tidak menjual produk generik; 
+          kami merancang solusi dari masalah nyata yang kami pahami.
+        </p>
+        <p class="about-body">
+          Berbasis di Kediri, Jawa Timur — kami percaya inovasi tidak harus 
+          datang dari pusat. Kearifan lokal dan teknologi modern bisa berjalan beriringan.
+        </p>
+
+        <div class="stats-row">
+          {stats.map(s => (
+            <div class="stat-item">
+              <div class="stat-val">{s.value}</div>
+              <div class="stat-label">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right: Visual -->
+      <div class="about-visual" aria-hidden="true">
+        <div class="visual-frame">
+          <svg width="100%" viewBox="0 0 400 400" fill="none">
+            <!-- Outer rings -->
+            <circle cx="200" cy="200" r="180" stroke="#C8A84B" stroke-width="0.5" opacity="0.1"/>
+            <circle cx="200" cy="200" r="140" stroke="#C8A84B" stroke-width="0.5" opacity="0.15"/>
+            <circle cx="200" cy="200" r="100" stroke="#C8A84B" stroke-width="1" opacity="0.2"/>
+            <!-- Diamond -->
+            <path d="M200 40L360 200L200 360L40 200Z" stroke="#C8A84B" stroke-width="1" fill="none" opacity="0.2"/>
+            <!-- Cardinal ticks -->
+            <line x1="200" y1="20" x2="200" y2="60" stroke="#C8A84B" stroke-width="1" opacity="0.6"/>
+            <line x1="380" y1="200" x2="340" y2="200" stroke="#C8A84B" stroke-width="1" opacity="0.6"/>
+            <line x1="200" y1="380" x2="200" y2="340" stroke="#C8A84B" stroke-width="1" opacity="0.6"/>
+            <line x1="20" y1="200" x2="60" y2="200" stroke="#C8A84B" stroke-width="1" opacity="0.6"/>
+            <!-- Cardinal dots -->
+            <circle cx="200" cy="20" r="4" fill="#C8A84B"/>
+            <circle cx="380" cy="200" r="4" fill="#C8A84B"/>
+            <circle cx="200" cy="380" r="4" fill="#C8A84B"/>
+            <circle cx="20" cy="200" r="4" fill="#C8A84B"/>
+            <!-- Center N mark -->
+            <circle cx="200" cy="200" r="60" fill="rgba(200,168,75,0.05)" stroke="rgba(200,168,75,0.3)" stroke-width="1.5"/>
+            <path d="M178 228V172L200 208V172M200 208V228" stroke="#C8A84B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Corner accents -->
+            <rect x="40" y="40" width="24" height="24" rx="2" stroke="#C8A84B" stroke-width="0.5" fill="none" opacity="0.2" transform="rotate(45 52 52)"/>
+            <rect x="336" y="40" width="24" height="24" rx="2" stroke="#C8A84B" stroke-width="0.5" fill="none" opacity="0.2" transform="rotate(45 348 52)"/>
+            <rect x="40" y="336" width="24" height="24" rx="2" stroke="#C8A84B" stroke-width="0.5" fill="none" opacity="0.2" transform="rotate(45 52 348)"/>
+            <rect x="336" y="336" width="24" height="24" rx="2" stroke="#C8A84B" stroke-width="0.5" fill="none" opacity="0.2" transform="rotate(45 348 348)"/>
+            <!-- Accent dots scattered -->
+            <circle cx="110" cy="110" r="2" fill="#C8A84B" opacity="0.3"/>
+            <circle cx="290" cy="110" r="2" fill="#C8A84B" opacity="0.3"/>
+            <circle cx="110" cy="290" r="2" fill="#C8A84B" opacity="0.3"/>
+            <circle cx="290" cy="290" r="2" fill="#C8A84B" opacity="0.3"/>
+          </svg>
+          <div class="visual-label">Est. 2025 · Kediri, Jawa Timur</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.about-section {
+  padding: 120px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-text { display: flex; flex-direction: column; gap: 20px; }
+
+.about-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  margin-top: 12px;
+}
+
+.about-heading em { color: var(--gold); }
+
+.about-body {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--muted);
+}
+
+.about-body strong { color: var(--cream); }
+.about-body em { color: var(--gold-light); font-style: italic; }
+
+.stats-row {
+  display: flex;
+  gap: 40px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(200,168,75,0.15);
+  margin-top: 8px;
+}
+
+.stat-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.about-visual { position: relative; }
+
+.visual-frame {
+  background: var(--ink);
+  border: 1px solid rgba(200,168,75,0.12);
+  padding: 40px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.visual-frame::before {
+  content: '';
+  position: absolute;
+  top: 12px; left: 12px; right: 12px; bottom: 12px;
+  border: 1px solid rgba(200,168,75,0.06);
+  pointer-events: none;
+}
+
+.visual-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(200,168,75,0.4);
+}
+
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 60px; }
+  .about-visual { max-width: 400px; margin: 0 auto; }
+}
+
+@media (max-width: 640px) {
+  .about-section { padding: 80px 0; }
+  .stats-row { gap: 24px; }
+}
+</style>

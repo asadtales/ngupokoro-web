@@ -1,0 +1,152 @@
+---
+const values = [
+  {
+    num: '01',
+    icon: '🔍',
+    title: 'Ngupokoro — Mencari Cara',
+    desc: 'Kami selalu mencari jalan terbaik. Tidak menyerah pada hambatan, kami percaya setiap masalah memiliki solusi yang belum ditemukan.',
+  },
+  {
+    num: '02',
+    icon: '⚙️',
+    title: 'Teknologi Tepat Guna',
+    desc: 'Solusi yang kami bangun sesuai kebutuhan nyata — tidak berlebihan, tidak kurang. Efisien dan relevan untuk konteks Indonesia.',
+  },
+  {
+    num: '03',
+    icon: '🌱',
+    title: 'Berakar Lokal',
+    desc: 'Lahir dari kearifan lokal Jawa, kami memahami tantangan dan kebutuhan unik pengguna Indonesia dari desa hingga kota.',
+  },
+  {
+    num: '04',
+    icon: '🤝',
+    title: 'Mitra, Bukan Vendor',
+    desc: 'Kami tumbuh bersama klien. Setiap proyek adalah kolaborasi jangka panjang, bukan sekadar transaksi selesai-pergi.',
+  },
+];
+---
+
+<section class="values-section" id="nilai">
+  <div class="container">
+    <div class="section-header">
+      <p class="label">03 — Nilai & Karakter</p>
+      <h2 class="section-heading">Yang kami percaya<br><em>dan kami jalani</em></h2>
+    </div>
+  </div>
+
+  <div class="values-strip">
+    {values.map((v) => (
+      <div class="value-item">
+        <div class="value-header">
+          <span class="value-num">{v.num}</span>
+          <span class="value-icon" aria-hidden="true">{v.icon}</span>
+        </div>
+        <h3 class="value-title">{v.title}</h3>
+        <p class="value-desc">{v.desc}</p>
+        <div class="value-line" aria-hidden="true"></div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+.values-section {
+  padding: 120px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  margin-bottom: 64px;
+}
+
+.section-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  margin-top: 14px;
+}
+
+.section-heading em { color: var(--gold); }
+
+.values-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(200,168,75,0.15);
+  border-left: 1px solid rgba(200,168,75,0.08);
+}
+
+.value-item {
+  padding: 52px 40px;
+  border-right: 1px solid rgba(200,168,75,0.08);
+  border-bottom: 1px solid rgba(200,168,75,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.value-item:hover {
+  background: rgba(200,168,75,0.03);
+}
+
+.value-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.value-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(200,168,75,0.35);
+}
+
+.value-icon {
+  font-size: 22px;
+  filter: grayscale(0.3);
+}
+
+.value-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.3;
+}
+
+.value-desc {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+  flex: 1;
+}
+
+.value-line {
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0;
+  transition: opacity 0.3s, width 0.3s;
+}
+
+.value-item:hover .value-line {
+  opacity: 1;
+  width: 48px;
+}
+
+@media (max-width: 1024px) {
+  .values-strip { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .values-section { padding: 80px 0; }
+  .values-strip { grid-template-columns: 1fr; }
+  .value-item { padding: 36px 24px; }
+}
+</style>
